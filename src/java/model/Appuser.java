@@ -23,9 +23,9 @@ import javax.validation.constraints.Size;
  * @author HP
  */
 @Entity
-@Table(name = "APPUSER", catalog = "", schema = "LEDEV")
+@Table(name = "APPUSER", schema = "LEDEV")
 @NamedQueries({
-    @NamedQuery(name = "Appuser.findAll", query = "SELECT a FROM Appuser a")
+      @NamedQuery(name = "Appuser.findAll", query = "SELECT a FROM Appuser a")
     , @NamedQuery(name = "Appuser.findByEmail", query = "SELECT a FROM Appuser a WHERE a.email = :email")
     , @NamedQuery(name = "Appuser.findByUname", query = "SELECT a FROM Appuser a WHERE a.uname = :uname")
     , @NamedQuery(name = "Appuser.findByComkey", query = "SELECT a FROM Appuser a WHERE a.comkey = :comkey")
@@ -37,32 +37,20 @@ import javax.validation.constraints.Size;
 public class Appuser implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 100)
-    @Column(name = "EMAIL")
     private String email;
-    @Size(max = 20)
-    @Column(name = "UNAME")
     private String uname;
-    @Size(max = 100)
-    @Column(name = "COMKEY")
     private String comkey;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "ID")
     private String id;
-    @Size(max = 100)
     @Column(name = "ID_TYPE")
     private String idType;
-    @Size(max = 100)
     @Column(name = "ACCOUNT_STATUS")
     private String accountStatus;
-    @Size(max = 100)
     @Column(name = "USER_TYPE")
     private String userType;
-    @Size(max = 100)
     @Column(name = "FULL_NAME")
     private String fullName;
     @JoinColumn(name = "ORG_REG_ID", referencedColumnName = "REGISTRATION_ID")

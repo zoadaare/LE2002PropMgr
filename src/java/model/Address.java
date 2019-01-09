@@ -18,19 +18,17 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "ADDRESS", catalog = "", schema = "LEDEV")
+@Table(name = "ADDRESS", schema = "LEDEV")
 @NamedQueries({
-    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
+      @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
     , @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId")
     , @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street")
-    , @NamedQuery(name = "Address.findByAptnum", query = "SELECT a FROM Address a WHERE a.aptnum = :aptnum")
     , @NamedQuery(name = "Address.findByCity", query = "SELECT a FROM Address a WHERE a.city = :city")
     , @NamedQuery(name = "Address.findByStateGeodiv", query = "SELECT a FROM Address a WHERE a.stateGeodiv = :stateGeodiv")
     , @NamedQuery(name = "Address.findByZipcode", query = "SELECT a FROM Address a WHERE a.zipcode = :zipcode")
@@ -39,29 +37,17 @@ import javax.validation.constraints.Size;
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "ADDRESS_ID")
     private BigDecimal addressId;
-    @Size(max = 200)
-    @Column(name = "STREET")
     private String street;
-    @Size(max = 10)
-    @Column(name = "APTNUM")
     private String aptnum;
-    @Size(max = 100)
-    @Column(name = "CITY")
     private String city;
-    @Size(max = 100)
     @Column(name = "STATE_GEODIV")
     private String stateGeodiv;
-    @Size(max = 20)
-    @Column(name = "ZIPCODE")
     private String zipcode;
-    @Size(max = 100)
-    @Column(name = "COUNTRY")
     private String country;
     @Column(name = "SPATIAL_OBJ_ID")
     private BigInteger spatialObjId;

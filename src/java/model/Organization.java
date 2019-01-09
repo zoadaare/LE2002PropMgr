@@ -17,50 +17,38 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 /**
  *
  * @author HP
  */
 @Entity
-@Table(name = "ORGANIZATION", catalog = "", schema = "LEDEV")
+@Table(name = "ORGANIZATION", schema = "LEDEV")
 @NamedQueries({
-    @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o")
+      @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o")
     , @NamedQuery(name = "Organization.findByRegistrationId", query = "SELECT o FROM Organization o WHERE o.registrationId = :registrationId")
     , @NamedQuery(name = "Organization.findByName", query = "SELECT o FROM Organization o WHERE o.name = :name")
     , @NamedQuery(name = "Organization.findByStatus", query = "SELECT o FROM Organization o WHERE o.status = :status")
     , @NamedQuery(name = "Organization.findByPrmContactName", query = "SELECT o FROM Organization o WHERE o.prmContactName = :prmContactName")
     , @NamedQuery(name = "Organization.findByPrmContactPhone", query = "SELECT o FROM Organization o WHERE o.prmContactPhone = :prmContactPhone")
-    , @NamedQuery(name = "Organization.findByPrmContactPhoneType", query = "SELECT o FROM Organization o WHERE o.prmContactPhoneType = :prmContactPhoneType")
     , @NamedQuery(name = "Organization.findByEmail", query = "SELECT o FROM Organization o WHERE o.email = :email")})
 public class Organization implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "REGISTRATION_ID")
     private String registrationId;
-    @Size(max = 200)
-    @Column(name = "NAME")
     private String name;
-    @Size(max = 20)
-    @Column(name = "STATUS")
     private String status;
-    @Size(max = 50)
     @Column(name = "PRM_CONTACT_NAME")
     private String prmContactName;
-    @Size(max = 50)
     @Column(name = "PRM_CONTACT_PHONE")
     private String prmContactPhone;
-    @Size(max = 50)
     @Column(name = "PRM_CONTACT_PHONE_TYPE")
     private String prmContactPhoneType;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 100)
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")
     @Column(name = "EMAIL")
     private String email;
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
@@ -157,7 +145,6 @@ public class Organization implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Organization)) {
             return false;
         }
